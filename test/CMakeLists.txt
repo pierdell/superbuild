@@ -27,7 +27,15 @@ CHECK_TARGET(nanoflann::nanoflann)
 CHECK_TARGET(opencv_core)
 CHECK_TARGET(gtsam)
 CHECK_TARGET(pybind11::pybind11)
+CHECK_TARGET(sqlite3::sqlite3)
+CHECK_TARGET(tclap::tclap)
+CHECK_TARGET(colormap::colormap)
+CHECK_TARGET(tinyply::tinyply)
+CHECK_TARGET(glad::glad)
+CHECK_TARGET(glfw)
+CHECK_TARGET(imgui::imgui)
+CHECK_TARGET(EnTT::EnTT)
 
 
-
-
+add_executable(test_app test_app.cxx)
+target_link_libraries(test_app PUBLIC sqlite3::sqlite3)

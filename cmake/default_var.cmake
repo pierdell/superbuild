@@ -9,3 +9,13 @@ if (NOT SUPERBUILD_INSTALL_DIR)
         get_filename_component(SUPERBUILD_INSTALL_DIR ${SUPERBUILD_INSTALL_DIR} ABSOLUTE)
         message(INFO " -- [Superbuild] `SUPERBUILD_INSTALL_DIR` not specified, setting it to ${SUPERBUILD_INSTALL_DIR}")
 endif()
+
+# -- Macro which sets the CMake variable for the install dir of a Package
+macro(SUPERBUILD_DEFAULT_INSTALL_DIR)
+    set(DEPENDENCY ${ARGV0})
+    if (NOT ${DEPENDENCY}_INSTALL_DIR)
+        set(${DEPENDENCY}_INSTALL_DIR ${SUPERBUILD_INSTALL_DIR}/${DEPENDENCY})
+        set(${DEPENDENCY}_INSTALL_DIR ${SUPERBUILD_INSTALL_DIR}/${DEPENDENCY} PARENT_SCOPE)
+        message(INFO " -- [Superbuild] Setting the install dir of package '${DEPENDENCY}' to ${${DEPENDENCY}_INSTALL_DIR} ")
+    endif()
+endmacro()

@@ -14,8 +14,14 @@ macro(SUPERBUILD_FIND_PACKAGE)
 endmacro()
 
 # List All Superbuild Dependencies Package Names
-# sqlite3 nanoflann colormap tinyply  tclap
-list(APPEND SUPERBUILD_ALL_DEPENDENCIES GTest Eigen3 glog Ceres cereal tessil yaml-cpp g2o OpenCV nanoflann gtsam pybind11)
+list(APPEND SUPERBUILD_ALL_DEPENDENCIES 
+        GTest Eigen3 glog 
+        Ceres cereal tessil 
+        yaml-cpp g2o OpenCV 
+        nanoflann gtsam pybind11 
+        sqlite3 tclap colormap 
+        tinyply EnTT
+        glfw glad imgui)
 
 # Finds all packages from the Superbuild
 macro(SUPERBUILD_FIND_ALL_PACKAGES)

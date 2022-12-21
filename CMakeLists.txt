@@ -23,7 +23,10 @@ macro(BUILD_PACKAGE)
     endif()
 endmacro()
 
-# GTest
+
+
+set(CMAKE_INSTALL_PREFIX ${SUPERBUILD_INSTALL_DIR})
+
 BUILD_PACKAGE(GTest)
 BUILD_PACKAGE(Eigen3)
 BUILD_PACKAGE(glog)
@@ -36,8 +39,15 @@ BUILD_PACKAGE(nanoflann)
 BUILD_PACKAGE(OpenCV)
 BUILD_PACKAGE(gtsam)
 BUILD_PACKAGE(pybind11)
-#
+BUILD_PACKAGE(glfw)
+BUILD_PACKAGE(glad)
+BUILD_PACKAGE(EnTT)
 
+BUILD_PACKAGE(sqlite3)
+BUILD_PACKAGE(tclap)
+BUILD_PACKAGE(colormap)
+BUILD_PACKAGE(tinyply)
+BUILD_PACKAGE(imgui)
 
 
 # Install util to find the file
