@@ -1,7 +1,6 @@
 include(${CMAKE_CURRENT_SOURCE_DIR}/../cmake/dependency_script_utils.cmake)
 SUPERBUILD_DEPENDENCY_HEADER(imgui docking)
 
-
 # Fetch implot dependency (at build time), to integrate the source with imgui in the generated dependency
 FetchContent_Declare(
         implot
@@ -19,6 +18,36 @@ if (NOT implot_POPULATED)
             ${implot_SOURCE_DIR}/implot_demo.cpp
             ${implot_SOURCE_DIR}/implot_items.cpp)
 endif ()
+
+# -- Fetch imgui_node_editor
+FetchContent_Declare(
+    imgui_node_editor
+    GIT_REPOSITORY  https://github.com/thedmd/imgui-node-editor
+    GIT_TAG         2f99b2d 
+)
+
+if (NOT imgui_node_editor_POPULATED)
+    message(INFO " -- Populating Imgui Node Editor")
+    FetchContent_Populate(imgui_node_editor)
+    set(IMGUI_NODE_EDITOR_HDRS
+        ${imgui_node_editor_SOURCE_DIR}/imgui_node_editor_internal.h
+        ${imgui_node_editor_SOURCE_DIR}/imgui_node_editor_internal.inl
+        ${imgui_node_editor_SOURCE_DIR}/imgui_node_editor.h
+        ${imgui_node_editor_SOURCE_DIR}/imgui_extra_math.h
+        ${imgui_node_editor_SOURCE_DIR}/imgui_extra_math.inl
+        ${imgui_node_editor_SOURCE_DIR}/imgui_canvas.h
+        ${imgui_node_editor_SOURCE_DIR}/imgui_bezier_math.h
+        ${imgui_node_editor_SOURCE_DIR}/imgui_bezier_math.inl
+        ${imgui_node_editor_SOURCE_DIR}/crude_json.h)
+
+    set(IMGUI_NODE_EDITOR_SRCS
+        ${imgui_node_editor_SOURCE_DIR}/imgui_node_editor_api.cpp
+        ${imgui_node_editor_SOURCE_DIR}/imgui_node_editor.cpp
+        ${imgui_node_editor_SOURCE_DIR}/imgui_canvas.cpp
+        ${imgui_node_editor_SOURCE_DIR}/crude_json.cpp)
+
+endif()
+
 
 FetchContent_Declare(
         IconFontHeaders
@@ -60,6 +89,13 @@ FetchContent_Declare(
         ##################################################################################################################
         # Project Files
         ##################################################################################################################
+        set(HEADERS_CXX_IMPL_FILES
+                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_opengl3.h
+                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_glfw.h)
+        set(SOURCES_CXX_IMPL_FILES
+                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_glfw.cpp)
+
         set(HEADERS_CXX_FILES
                 ${_IMGUI_SOURCE_DIR}/imgui.h
                 ${_IMGUI_SOURCE_DIR}/imconfig.h
@@ -69,8 +105,10 @@ FetchContent_Declare(
                 ${_IMGUI_SOURCE_DIR}/imstb_truetype.h
                 ${_IMGUI_SOURCE_DIR}/misc/cpp/imgui_stdlib.h
                 ${IMPLOT_HDRS} 
-                ${IconFontHeaders_HDRS})
-    
+                ${IconFontHeaders_HDRS}
+                ${IMGUI_NODE_EDITOR_HDRS}
+                ${HEADERS_CXX_IMPL_FILES})
+
         set(SOURCES_CXX_FILES
                 ${_IMGUI_SOURCE_DIR}/imgui.cpp
                 ${_IMGUI_SOURCE_DIR}/imgui_draw.cpp
@@ -78,15 +116,11 @@ FetchContent_Declare(
                 ${_IMGUI_SOURCE_DIR}/imgui_tables.cpp
                 ${_IMGUI_SOURCE_DIR}/imgui_demo.cpp
                 ${_IMGUI_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp
-                ${IMPLOT_SRCS})
+                ${IMPLOT_SRCS}
+                ${IMGUI_NODE_EDITOR_SRCS}
+                ${SOURCES_CXX_IMPL_FILES})
         file(GLOB FONTS_FILES ${FONTS_DIR}/*.ttf)
-        set(HEADERS_CXX_IMPL_FILES
-                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_opengl3.h
-                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_glfw.h)
-        set(SOURCES_CXX_IMPL_FILES
-                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
-                ${_IMGUI_SOURCE_DIR}/backends/imgui_impl_glfw.cpp)
-    
+            
         ##################################################################################################################
         # Target
         ##################################################################################################################

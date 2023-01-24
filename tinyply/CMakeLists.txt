@@ -14,7 +14,6 @@ if (NOT tinyply_POPULATED)
 endif ()
 
 set(tinyply_SOURCE_INCLUDE_DIR ${tinyply_SOURCE_DIR}/source)
-set(tinyply_INSTALL_INCLUDE_DIR ${TINYPLY_INSTALL_DIR}/include)
 
 add_library(tinyply SHARED ${tinyply_SOURCE_DIR}/source/tinyply.cpp)
 target_include_directories(tinyply INTERFACE
@@ -27,3 +26,6 @@ SUPERBUILD_INSTALL_TARGET(TARGET tinyply
     INSTALL_DIRECTORY ${tinyply_INSTALL_DIR})
 
 SUPERBUILD_DEPENDENCY_FOOTER(tinyply lib/cmake)
+
+# Install Header
+install(FILES ${tinyply_SOURCE_DIR}/source/tinyply.h DESTINATION tinyply/include)
