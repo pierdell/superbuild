@@ -21,7 +21,7 @@ list(APPEND SUPERBUILD_ALL_DEPENDENCIES
         nanoflann gtsam pybind11 
         sqlite3 tclap colormap 
         tinyply EnTT
-        glfw glad imgui)
+        glfw glad imgui assimp sophus basalt)
 
 # Finds all packages from the Superbuild
 macro(SUPERBUILD_FIND_ALL_PACKAGES)

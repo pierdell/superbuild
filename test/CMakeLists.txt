@@ -35,7 +35,10 @@ CHECK_TARGET(glad::glad)
 CHECK_TARGET(glfw)
 CHECK_TARGET(imgui::imgui)
 CHECK_TARGET(EnTT::EnTT)
+CHECK_TARGET(sophus::sophus)
+CHECK_TARGET(basalt::basalt)
+
 
 
 add_executable(test_app test_app.cxx)
-target_link_libraries(test_app PUBLIC sqlite3::sqlite3)
+target_link_libraries(test_app PUBLIC sqlite3::sqlite3 Eigen3::Eigen sophus::sophus basalt::basalt)

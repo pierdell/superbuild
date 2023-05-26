@@ -1,9 +1,11 @@
 cmake_minimum_required(VERSION 3.14)
-project(superbuild)
+project(superbuild LANGUAGES CXX)
 
 include(cmake/default_var.cmake)
 option(BUILD_ONLY_UNINSTALLED_PACKAGE "Whether to build uninstalled package only (otherwise rebuild all packages)" ON)
 
+set(LANGUAGES CXX)
+set(CXX_STANDARD 17)
 macro(BUILD_PACKAGE)
     
     set(DEPENDENCY ${ARGV0})
@@ -44,7 +46,9 @@ BUILD_PACKAGE(glad)
 BUILD_PACKAGE(EnTT)
 BUILD_PACKAGE(assimp)
 
-BUILD_PACKAGE(sqlite3)
+# Installed with fetch content
+BUILD_PACKAGE(sophus)
+BUILD_PACKAGE(basalt)
 BUILD_PACKAGE(tclap)
 BUILD_PACKAGE(colormap)
 BUILD_PACKAGE(tinyply)
