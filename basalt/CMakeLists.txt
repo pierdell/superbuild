@@ -49,6 +49,6 @@ if (NOT basalt_POPULATED)
         TARGET_PREFIX basalt 
         INCLUDE_DIRECTORY ${SOURCE_DIR}
         INSTALL_DIRECTORY ${sophus_INSTALL_DIR})
-
 endif ()
+
 SUPERBUILD_DEPENDENCY_FOOTER(basalt lib/cmake)

@@ -45,6 +45,7 @@ BUILD_PACKAGE(glfw)
 BUILD_PACKAGE(glad)
 BUILD_PACKAGE(EnTT)
 BUILD_PACKAGE(assimp)
+BUILD_PACKAGE(pcl)
 
 # Installed with fetch content
 BUILD_PACKAGE(sophus)
